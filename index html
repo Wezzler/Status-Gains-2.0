@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Status Gain Saved</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+    color:#fff;
+    background:
+        radial-gradient(circle at top,#16452f,#07130d 50%,#020604);
+}
+
+.container{
+    width:92%;
+    max-width:700px;
+    margin:auto;
+    padding:25px 0 50px;
+}
+
+/* HEADER */
+
+.hero{
+    text-align:center;
+    padding:30px 0 20px;
+}
+
+.logo{
+    font-size:clamp(30px,8vw,52px);
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:#25d366;
+}
+
+.subtitle{
+    margin-top:12px;
+    color:#b9c8c0;
+    line-height:1.6;
+}
+
+/* CARDS */
+
+.card{
+    background:rgba(10,28,19,.96);
+    border:1px solid #205238;
+    border-radius:22px;
+    padding:22px;
+    margin-top:18px;
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+}
+
+/* COUNTER */
+
+.counter{
+    text-align:center;
+}
+
+.counter-title{
+    color:#a9b9b1;
+    font-size:13px;
+    letter-spacing:1px;
+}
+
+.counter-number{
+    font-size:43px;
+    font-weight:900;
+    color:#25d366;
+    margin:8px 0;
+}
+
+/* FORM */
+
+h2{
+    margin-bottom:5px;
+}
+
+.notice{
+    background:#08160e;
+    border-left:4px solid #25d366;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+    color:#cbd8d1;
+    line-height:1.6;
+}
+
+label{
+    display:block;
+    margin-top:18px;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+input,
+select{
+    width:100%;
+    padding:15px;
+    border-radius:12px;
+    border:1px solid #315a43;
+    background:#06100b;
+    color:white;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus,
+select:focus{
+    border-color:#25d366;
+}
+
+.phone{
+    display:grid;
+    grid-template-columns:160px 1fr;
+    gap:10px;
+}
+
+/* BUTTONS */
+
+button{
+    width:100%;
+    border:0;
+    border-radius:13px;
+    padding:16px;
+    margin-top:20px;
+    font-size:16px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.generate{
+    background:#25d366;
+    color:#031008;
+}
+
+.download{
+    background:#128c7e;
+    color:white;
+    display:none;
+}
+
+/* COUNTDOWN */
+
+.countdown{
+    text-align:center;
+    color:#25d366;
+    font-size:clamp(35px,10vw,60px);
+    font-weight:900;
+    letter-spacing:2px;
+    margin:18px 0;
+}
+
+.timer-text{
+    text-align:center;
+    color:#c1cec7;
+    line-height:1.6;
+}
+
+/* MESSAGES */
+
+.error{
+    color:#ff8888;
+    margin-top:12px;
+    display:none;
+}
+
+.success{
+    color:#76ffa0;
+    margin-top:12px;
+    display:none;
+}
+
+/* INSTRUCTIONS */
+
+.steps{
+    padding-left:22px;
+    line-height:2;
+    color:#c8d5ce;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    margin-top:30px;
+    color:#708077;
+    font-size:13px;
+}
+
+.watermark{
+    color:#25d366;
+    margin-top:7px;
+}
+
+/* MOBILE */
+
+@media(max-width:520px){
+
+    .phone{
+        grid-template-columns:1fr;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="logo">
+        STATUS <span>GAIN</span> SAVED
+    </div>
+
+    <p class="subtitle">
+        Enter your WhatsApp number and the name
+        you want people to save you as.
+    </p>
+
+</section>
+
+
+<!-- COUNTER -->
+
+<div class="card counter">
+
+    <div class="counter-title">
+        PEOPLE WHO SAVED THEIR TAGS
+    </div>
+
+    <div
+        class="counter-number"
+        id="savedCount"
+    >
+        0
+    </div>
+
+    <div class="counter-title">
+        THIS DEVICE
+    </div>
+
+</div>
+
+
+<!-- FORM -->
+
+<div class="card">
+
+    <h2>
+        📝 Create Your Contact
+    </h2>
+
+    <div class="notice">
+
+        <b>Instructions</b><br>
+
+        Enter your WhatsApp number using the
+        correct country code. Then enter the
+        name you want people to save your
+        contact as.
+
+    </div>
+
+
+    <label>
+        Name to save
+    </label>
+
+    <input
+        id="name"
+        type="text"
+        maxlength="80"
+        placeholder="Example: Cyberdogg Tech"
+    >
+
+
+    <label>
+        WhatsApp number
+    </label>
+
+    <div class="phone">
+
+        <select id="country">
+        </select>
+
+        <input
+            id="number"
+            type="tel"
+            inputmode="numeric"
+            placeholder="Enter number"
+        >
+
+    </div>
+
+
+    <button
+        class="generate"
+        id="generate"
+    >
+        GENERATE MY CONTACT
+    </button>
+
+
+    <div
+        class="error"
+        id="error"
+    ></div>
+
+
+    <div
+        class="success"
+        id="success"
+    ></div>
+
+</div>
+
+
+<!-- COUNTDOWN -->
+
+<div
+    class="card"
+    id="timerCard"
+    style="display:none"
+>
+
+    <h2 style="text-align:center">
+        ⏳ Campaign Countdown
+    </h2>
+
+    <div
+        class="countdown"
+        id="countdown"
+    >
+        24:00:00
+    </div>
+
+    <p
+        class="timer-text"
+        id="timerText"
+    >
+        When the countdown ends,
+        your VCF contact file will become available.
+    </p>
+
+</div>
+
+
+<!-- DOWNLOAD -->
+
+<div
+    class="card"
+    id="downloadCard"
+    style="display:none"
+>
+
+    <h2>
+        ✅ Your Contact Is Ready
+    </h2>
+
+    <div class="notice">
+
+        <b>How to save your file:</b>
+
+        <ol class="steps">
+
+            <li>
+                Tap <b>Download VCF File</b>.
+            </li>
+
+            <li>
+                Open the downloaded
+                <b>.vcf</b> file.
+            </li>
+
+            <li>
+                Select your Contacts app.
+            </li>
+
+            <li>
+                Tap <b>Save</b>.
+            </li>
+
+            <li>
+                Your contact is now saved.
+            </li>
+
+        </ol>
+
+    </div>
+
+
+    <button
+        class="download"
+        id="download"
+    >
+        📥 DOWNLOAD VCF FILE
+    </button>
+
+</div>
+
+
+<footer>
+
+    STATUS GAIN SAVED
+
+    <div class="watermark">
+        💍 powered by Cyberdogg Tech
+    </div>
+
+</footer>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   COUNTRY CODES
+   ========================================= */
+
+const countries = [
+
+["Zimbabwe","+263"],
+["South Africa","+27"],
+["Zambia","+260"],
+["Botswana","+267"],
+["Mozambique","+258"],
+["Malawi","+265"],
+["Namibia","+264"],
+["Nigeria","+234"],
+["Ghana","+233"],
+["Kenya","+254"],
+["Tanzania","+255"],
+["Uganda","+256"],
+["Rwanda","+250"],
+["Ethiopia","+251"],
+
+["United States","+1"],
+["Canada","+1"],
+["United Kingdom","+44"],
+["Australia","+61"],
+["New Zealand","+64"],
+
+["India","+91"],
+["Pakistan","+92"],
+["Bangladesh","+880"],
+["United Arab Emirates","+971"],
+["Saudi Arabia","+966"],
+
+["Germany","+49"],
+["France","+33"],
+["Italy","+39"],
+["Spain","+34"],
+["Portugal","+351"],
+["Netherlands","+31"],
+["Belgium","+32"],
+["Switzerland","+41"],
+["Sweden","+46"],
+["Norway","+47"],
+["Denmark","+45"],
+["Finland","+358"],
+["Ireland","+353"],
+
+["Brazil","+55"],
+["Mexico","+52"],
+["Argentina","+54"],
+["Colombia","+57"],
+
+["Philippines","+63"],
+["Indonesia","+62"],
+["Malaysia","+60"],
+["Singapore","+65"],
+["Japan","+81"],
+["South Korea","+82"],
+["China","+86"],
+["Turkey","+90"],
+
+["Egypt","+20"],
+["Morocco","+212"]
+
+];
+
+
+const country =
+document.getElementById("country");
+
+
+countries.forEach(item => {
+
+    const option =
+    document.createElement("option");
+
+    option.value =
+    item[1];
+
+    option.textContent =
+    item[0] + " (" + item[1] + ")";
+
+    if(item[1] === "+263"){
+        option.selected = true;
+    }
+
+    country.appendChild(option);
+
+});
+
+
+/* =========================================
+   ELEMENTS
+   ========================================= */
+
+const nameInput =
+document.getElementById("name");
+
+const numberInput =
+document.getElementById("number");
+
+const generate =
+document.getElementById("generate");
+
+const error =
+document.getElementById("error");
+
+const success =
+document.getElementById("success");
+
+const savedCount =
+document.getElementById("savedCount");
+
+const timerCard =
+document.getElementById("timerCard");
+
+const downloadCard =
+document.getElementById("downloadCard");
+
+const download =
+document.getElementById("download");
+
+const countdown =
+document.getElementById("countdown");
+
+const timerText =
+document.getElementById("timerText");
+
+
+/* =========================================
+   GLOBAL CAMPAIGN
+   =========================================
+
+   This creates a 24-hour campaign.
+
+   The first visitor starts the timer.
+*/
+
+let campaignEnd =
+localStorage.getItem(
+    "statusGainCampaignEnd"
+);
+
+
+if(!campaignEnd){
+
+    campaignEnd =
+    Date.now() +
+    (24 * 60 * 60 * 1000);
+
+    localStorage.setItem(
+        "statusGainCampaignEnd",
+        campaignEnd
+    );
+
+}
+
+
+/* =========================================
+   SAVED COUNTER
+   ========================================= */
+
+let saved =
+parseInt(
+    localStorage.getItem(
+        "statusGainSaved"
+    )
+) || 0;
+
+
+savedCount.textContent =
+saved.toLocaleString();
+
+
+/* =========================================
+   USER CONTACT DATA
+   ========================================= */
+
+let contactName =
+localStorage.getItem(
+    "statusGainName"
+);
+
+let contactNumber =
+localStorage.getItem(
+    "statusGainNumber"
+);
+
+
+/* =========================================
+   COUNTDOWN
+   ========================================= */
+
+function updateCountdown(){
+
+    const remaining =
+    Number(campaignEnd) -
+    Date.now();
+
+
+    if(remaining <= 0){
+
+        countdown.textContent =
+        "00:00:00";
+
+        timerText.textContent =
+        "✅ The countdown has ended. Your contact file is ready.";
+
+        if(
+            contactName &&
+            contactNumber
+        ){
+
+            downloadCard.style.display =
+            "block";
+
+            download.style.display =
+            "block";
+
+        }
+
+        return;
+
+    }
+
+
+    const hours =
+    Math.floor(
+        remaining / 3600000
+    );
+
+
+    const minutes =
+    Math.floor(
+        (remaining % 3600000)
+        / 60000
+    );
+
+
+    const seconds =
+    Math.floor(
+        (remaining % 60000)
+        / 1000
+    );
+
+
+    countdown.textContent =
+
+        String(hours).padStart(2,"0")
+        + ":"
+        + String(minutes).padStart(2,"0")
+        + ":"
+        + String(seconds).padStart(2,"0");
+
+}
+
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+updateCountdown();
+
+
+/* =========================================
+   GENERATE CONTACT
+   ========================================= */
+
+generate.addEventListener(
+"click",
+function(){
+
+    const name =
+    nameInput.value.trim();
+
+    const number =
+    numberInput.value
+    .replace(/\D/g,"");
+
+    const code =
+    country.value;
+
+
+    error.style.display =
+    "none";
+
+    success.style.display =
+    "none";
+
+
+    if(name.length < 2){
+
+        error.textContent =
+        "Please enter the name you want people to save.";
+
+        error.style.display =
+        "block";
+
+        return;
+
+    }
+
+
+    if(number.length < 5){
+
+        error.textContent =
+        "Please enter a valid WhatsApp number.";
+
+        error.style.display =
+        "block";
+
+        return;
+
+    }
+
+
+    contactName =
+    name;
+
+    contactNumber =
+    code + number;
+
+
+    /* SAVE LOCALLY */
+
+    localStorage.setItem(
+        "statusGainName",
+        contactName
+    );
+
+    localStorage.setItem(
+        "statusGainNumber",
+        contactNumber
+    );
+
+
+    /* INCREASE COUNTER */
+
+    saved++;
+
+    localStorage.setItem(
+        "statusGainSaved",
+        saved
+    );
+
+
+    savedCount.textContent =
+    saved.toLocaleString();
+
+
+    success.textContent =
+    "✓ Your Status Gain tag has been recorded.";
+
+    success.style.display =
+    "block";
+
+
+    timerCard.style.display =
+    "block";
+
+
+    generate.textContent =
+    "TAG RECORDED ✓";
+
+
+    /* CHECK TIMER */
+
+    if(
+        Date.now() >=
+        Number(campaignEnd)
+    ){
+
+        downloadCard.style.display =
+        "block";
+
+        download.style.display =
+        "block";
+
+    }
+
+});
+
+
+/* =========================================
+   DOWNLOAD VCF
+   ========================================= */
+
+download.addEventListener(
+"click",
+function(){
+
+    if(
+        !contactName ||
+        !contactNumber
+    ){
+
+        return;
+
+    }
+
+
+    const cleanNumber =
+    contactNumber.replace(
+        /[^\d+]/g,
+        ""
+    );
+
+
+    const safeName =
+    contactName.replace(
+        /[\r\n]/g,
+        " "
+    );
+
+
+    const vcf =
+
+`BEGIN:VCARD
+VERSION:3.0
+FN:${safeName}
+TEL;TYPE=CELL,VOICE:${cleanNumber}
+END:VCARD`;
+
+
+    const blob =
+    new Blob(
+        [vcf],
+        {
+            type:
+            "text/vcard;charset=utf-8"
+        }
+    );
+
+
+    const url =
+    URL.createObjectURL(blob);
+
+
+    const link =
+    document.createElement("a");
+
+
+    link.href =
+    url;
+
+
+    link.download =
+    safeName
+    .replace(
+        /[^a-z0-9]/gi,
+        "_"
+    )
+    + ".vcf";
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    URL.revokeObjectURL(url);
+
+});
+
+
+/* =========================================
+   RESTORE AFTER REFRESH
+   ========================================= */
+
+if(
+    contactName &&
+    contactNumber
+){
+
+    nameInput.value =
+    contactName;
+
+    timerCard.style.display =
+    "block";
+
+
+    if(
+        Date.now() >=
+        Number(campaignEnd)
+    ){
+
+        downloadCard.style.display =
+        "block";
+
+        download.style.display =
+        "block";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
